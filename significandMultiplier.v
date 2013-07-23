@@ -20,15 +20,7 @@ module significandMultiplier(aIn, bIn, sum, carry);
     end
   endgenerate
   
-  //Multiplier carry-out detection
-  wire [(SIG_WIDTH+1)/2:0] pp_signs;
-  genvar c;
-  generate
-    for(c=0;c<(SIG_WIDTH+1)/2+1;c=c+1) begin
-       assign pp_signs[c] = recoded[c][SIG_WIDTH+2];
-    end
-  endgenerate
-  wire pp_carry_out = |pp_signs;
+ 
   
  
   //CSA array to add partial products (Double Precision tree)

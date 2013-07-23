@@ -28,7 +28,7 @@ module t_fpfma();
   integer fd;
   initial begin
     rnd=2'b01;
-    fd=$fopen("dp_add_inputs.txt", "r");//fd=$fopen("testInputs.txt", "r");
+    fd=$fopen("dp_sub_inputs.txt", "r");//fd=$fopen("testInputs.txt", "r");
     //op=0;
   end
   integer i;

@@ -103,13 +103,11 @@ module fpfma(A, B, C, rnd, clk, rst, result);
   wire [2*(SIG_WIDTH+1)+1:0] carry_add_wgt = {carry_add[2*(SIG_WIDTH+1):0],1'b0}; //discard carry_add MSB
   eac_cla_adder /*50-bit*/ EAC(sum_add , carry_add_wgt, cin, sticky, effectiveOp, sum_eac, c_eac );
   
-
-  wire [2*(SIG_WIDTH+1)+5:0] test_sum_eac = sum_add + (carry_add<<1);
   
   //*****************************************************************************************************
   //********************* Leading zero anticipator
-  wire [5:0] lza_shamt;
-  lza LZA(sum_add, carry_add_wgt, lza_shamt);//50-bit
+  wire [6:0] lza_shamt;
+  lza LZA(sum_add, carry_add_wgt, lza_shamt);//108-bit
   
 
   

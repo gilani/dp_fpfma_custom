@@ -1,7 +1,7 @@
 module normalizeAndExpUpdate(prenormalized, lza_shamt, cExpIsSmall, shamt, exp_correction, normalized, res_exp, normalized_exp);
   `include "parameters.v"
   input [3*(SIG_WIDTH+1)+7:0] prenormalized;//80-bit
-  input [5:0] lza_shamt, shamt;
+  input [6:0] lza_shamt, shamt;
   input cExpIsSmall;
   input [EXP_WIDTH-1:0] res_exp;
   output [EXP_WIDTH-1:0] normalized_exp;
@@ -14,8 +14,8 @@ module normalizeAndExpUpdate(prenormalized, lza_shamt, cExpIsSmall, shamt, exp_c
   //If cExp was small, the top 24 bits only  so add 24
   //to lza_shamt
   wire shamt_portion = (shamt>=SIG_WIDTH+4);
-  wire [5:0] lza_corrected1 = (shamt_portion)? lza_shamt+(SIG_WIDTH+4) : shamt;
-  wire [EXP_WIDTH-1:0] exp_update1 = (shamt_portion)? res_exp-lza_shamt+2+cExpIsSmall-(shamt==56) : res_exp+1;
+  wire [5:0] lza_corrected1 = (shamt_portion)? lza_shamt+(SIG_WIDTH+3) : shamt;
+  wire [EXP_WIDTH-1:0] exp_update1 = (shamt_portion)? res_exp-lza_shamt+3+cExpIsSmall-(shamt==56) : res_exp+1;
   
   //Big shift
   assign normalized1 = prenormalized << lza_corrected1;
